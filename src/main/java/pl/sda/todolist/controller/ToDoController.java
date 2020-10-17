@@ -27,13 +27,13 @@ public class ToDoController {
     public String todos(Model model) {
 
         List<ToDo> todos = todoService.getAllToDos();
-//        List<ToDo> completed = todoService.getAllCompleted();
+       List<ToDo> completed = todoService.getAllFinished();
 
         List<ToDoDTO> dtos = ToDoDTOMapper.mapEntityToDto(todos);
-//        List<TodoDto> completedDtos = TodoMapper.mapEntityToDto(completed);
+        List<ToDoDTO> completedDtos = ToDoDTOMapper.mapEntityToDto(completed);
 
         model.addAttribute("todos", dtos);
-//        model.addAttribute("completed", completedDtos);
+        model.addAttribute("completed", completedDtos);
 
         return "todos";
     }

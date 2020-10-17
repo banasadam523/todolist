@@ -18,6 +18,15 @@
         <td th:text="${todo.finishDate}" />
 
     </tr>
+    <tr th:each="todo : ${completed}">
+        <td th:text="${todo.id}" />
+        <td th:text="${todo.name}" />
+        <td th:text="${todo.status}" />
+        <td th:text="${todo.description}" />
+        <td th:text="${todo.startDate}" />
+        <td th:text="${todo.finishDate}" />
+
+    </tr>
 </table>
 </body>
 </html>

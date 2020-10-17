@@ -28,15 +28,15 @@ public class ToDoService {
         return toDoRepository.save(todo);
     }
 
-    public List<ToDo> getAllToDos(){
-       return toDoRepository.getAll();
-    }
+//    public List<ToDo> getAllToDos(){
+//       return toDoRepository.getAll();
+//    }
 
     public List<ToDo> getAllFinished(){
         return toDoRepository.getAllByFinished(true);
     }
 
-    public List<ToDo> getAllUnfinished(){
+    public List<ToDo> getAllToDos(){
         return toDoRepository.getAllByFinished(false);
     }
     public void finishToDo(Long id) {

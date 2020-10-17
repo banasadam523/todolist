@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create TODO</title>
+</head>
+<body>
+<h1>Create New ToDo</h1>
+
+<form role="form" th:object="${Todo}" th:action="@{/todos/add}" method="post">
+
+    <div>
+        <input type="text" name="name" id="name" placeholder="Task name" />
+    </div>
+
+    <div>
+        <input type="text" name="description" id="description" placeholder="Desription max.255 characters" />
+    </div>
+
+    <input type="submit" value="Zapisz" />
+
+</form>
+</body>
+</html>

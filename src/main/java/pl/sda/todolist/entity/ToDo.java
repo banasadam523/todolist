@@ -81,7 +81,7 @@ public class ToDo {
     }
 
     public void setFinished(boolean finished){
-        if(!finished) {
+        if(finished!=true) {
             return;
         }
 

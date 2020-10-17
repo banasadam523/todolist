@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+</head>
+<body>
+<h1>Todo List</h1>
+<table>
+<!--    pomimo że z kontrolera szczytywany jest obiekt DTO tutaj nazwaliśmy to 'todo'-->
+    <tr th:each="todo : ${todos}">
+        <td th:text="${todo.id}" />
+        <td th:text="${todo.name}" />
+        <td th:text="${todo.status}" />
+        <td th:text="${todo.description}" />
+        <td th:text="${todo.startDate}" />
+        <td th:text="${todo.finishDate}" />
+
+    </tr>
+</table>
+</body>
+</html>

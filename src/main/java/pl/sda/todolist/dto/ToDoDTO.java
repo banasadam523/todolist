@@ -13,6 +13,13 @@ public class ToDoDTO {
 
     private boolean status;
 
+    public ToDoDTO() {
+    }
+
+    public ToDoDTO(String name) {
+        this.name = name;
+    }
+
     public long getId() {
         return id;
     }

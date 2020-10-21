@@ -11,15 +11,18 @@ public class ToDo {
     private long id;
 
     private String name;
+    @Column(length = 255)
     private String description;
 
     @Temporal(TemporalType.DATE)
     private Date startDate;
 
+    @Column(nullable = true)
     @Temporal(TemporalType.DATE)
     private Date finishDate;
 
     //true if finished
+    @Column()
     private boolean finished;
 
     public ToDo() {
@@ -76,20 +79,18 @@ public class ToDo {
         return finished;
     }
 
-    public void isFinished(boolean finished) {
+    public void setFinished(boolean finished) {
         this.finished = finished;
     }
 
-    public void setFinished(boolean finished){
-        if(finished!=true) {
-            return;
-        }
-
-        if(finished) {
-            finishDate = new Date();
-
-        }
-        this.finished = finished;
-    }
+//    public void setFinished(){
+//
+//
+//        if(finished) {
+//            finishDate = new Date();
+//
+//        }
+//        this.finished = true;
+//    }
 
 }

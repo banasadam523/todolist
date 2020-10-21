@@ -8,6 +8,7 @@ import pl.sda.todolist.mapper.ToDoDTOMapper;
 import pl.sda.todolist.repo.ToDoRepository;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,9 +29,6 @@ public class ToDoService {
         return toDoRepository.save(todo);
     }
 
-//    public List<ToDo> getAllToDos(){
-//       return toDoRepository.getAll();
-//    }
 
     public List<ToDo> getAllFinished(){
         return toDoRepository.getAllByFinished(true);
@@ -39,11 +37,13 @@ public class ToDoService {
     public List<ToDo> getAllToDos(){
         return toDoRepository.getAllByFinished(false);
     }
+
     public void finishToDo(Long id) {
         ToDo todo = toDoRepository.getById(id);
 
         if (todo != null) {
             todo.setFinished(true);
+            todo.setFinishDate(new Date());
             toDoRepository.save(todo);
         }
         //TODO what if user sent bad id? Is this return correct?

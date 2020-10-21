@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface ToDoRepository extends JpaRepository<ToDo,Long> {
     ToDo getById(long id);
-  //  List<ToDo> getAll();
+
     List<ToDo> getAllByFinished(boolean finished);
 
 

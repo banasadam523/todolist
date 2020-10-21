@@ -6,10 +6,20 @@
     <title>Todo List</title>
 </head>
 <body>
-<h1>Todo List</h1>
+
+<header>
+    <h1>To Do List</h1>
+    <nav>
+        <ul>
+            <li><a href="/todos">My Todos</a></li>
+            <li><a href="/todos/add">Add new task to do</a></li>
+        </ul>
+    </nav>
+</header>
 <table>
 <!--    pomimo że z kontrolera szczytywany jest obiekt DTO tutaj nazwaliśmy to 'todo'-->
     <tr th:each="todo : ${todos}">
+
         <td th:text="${todo.id}" />
         <td th:text="${todo.name}" />
         <td th:text="${todo.status}" />
@@ -17,7 +27,11 @@
         <td th:text="${todo.startDate}" />
         <td th:text="${todo.finishDate}" />
 
+
     </tr>
+</table>
+<br/>
+<table>
     <tr th:each="todo : ${completed}">
         <td th:text="${todo.id}" />
         <td th:text="${todo.name}" />
@@ -28,5 +42,14 @@
 
     </tr>
 </table>
+<form method="post">
+
+<div>
+    <input type="text" name="id" id="id"  placeholder="give id of todo" />
+</div>
+
+<input type="submit" value="Set Completed" />
+</form>
+
 </body>
 </html>

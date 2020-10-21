@@ -39,7 +39,7 @@ public class ToDoController {
     }
 
     @RequestMapping(value = "/todos/add", method = RequestMethod.GET)
-    public String createQuiz(Model model) {
+    public String createTodo(Model model) {
 
         model.addAttribute("addTodo", new ToDoDTO());
 
@@ -47,15 +47,28 @@ public class ToDoController {
     }
 
     @RequestMapping(value = "/todos/add", method = RequestMethod.POST)
-    public String createTodo(@ModelAttribute("Todo") @Validated ToDoDTO toDoDTO, BindingResult bindingResult, Model model) {
+    public String createTodo(@ModelAttribute("Todo") @Validated ToDoDTO toDoDTO,
+                             BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             return "/createTodo";
         }
 
 
+        toDoDTO.setStartDate(new Date());
         todoService.save(toDoDTO);
 
+
+        return "redirect:/todos";
+    }
+
+    @RequestMapping(value = "/todos",method = RequestMethod.POST)
+    public String completeTodo(@RequestParam("id") Long id){
+
+
+        //ustawia status jako zakończony
+
+        todoService.finishToDo(id);
 
         return "redirect:/todos";
     }

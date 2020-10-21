@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ToDoDTOMapper {
     public static ToDo mapDTOToEntity(ToDoDTO dto) {
 
@@ -17,7 +18,7 @@ public class ToDoDTOMapper {
         toDo.setDescription(dto.getDescription());
         toDo.setStartDate(dto.getStartDate());
         toDo.setFinishDate(dto.getFinishDate());
-        toDo.isFinished(dto.isStatus());
+        toDo.setFinished(dto.isStatus());
 
         return toDo;
 
@@ -28,7 +29,7 @@ public class ToDoDTOMapper {
         ToDoDTO dto = new ToDoDTO(entity.getName());
         dto.setId(entity.getId());
 
-       // DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         dto.setStartDate(entity.getStartDate());
         dto.setFinishDate(entity.getFinishDate());

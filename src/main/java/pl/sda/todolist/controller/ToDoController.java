@@ -76,26 +76,4 @@ public class ToDoController {
 
 
 
-
-//    @ResponseBody
-//    @RequestMapping(value = "/todos/{name}", method = RequestMethod.POST)
-//    public ResponseEntity<?> addTodos(@PathVariable("name") String name) {
-//
-//        Todo todo = todoService.addTodo(name);
-//
-//        TodoDto dto = TodoMapper.mapEntityToDto(todo);
-//
-//        return ResponseEntity.ok(dto);
-//    }
-//
-//    @ResponseBody
-//    @RequestMapping(value = "/todos/{id}", method = RequestMethod.PUT, produces = MediaType.TEXT_PLAIN_VALUE)
-//    public String updateComplated(@PathVariable("id") Long id) {
-//
-//        todoService.completeTodo(id);
-//
-//        return "200 OK";
-//    }
-
-
 }

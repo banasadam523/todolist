@@ -25,6 +25,7 @@ public class ToDo {
     @Column()
     private boolean finished;
 
+
     public ToDo() {
         startDate = new Date();
     }

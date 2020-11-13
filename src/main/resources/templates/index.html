@@ -25,12 +25,14 @@
             </button>
             <a class="navbar-brand" href="#" th:href="@{/}">Registration and
                 Login Module</a>
+            <a class="navbar-brand" href="#" th:href="@{/todos/add}">Add new task Todo</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
             </ul>
         </div>
+
     </div>
 </nav>
 
@@ -40,6 +42,47 @@
 <div class="container">
     <h1>Todo list with register ang login features in spring boot</h1>
     Welcome <span sec:authentication="principal.username"> User</span>
+</div>
+<div class = "container">
+    <div class = "row">
+        <div class = "col-md-6 col-md-offset-3">
+
+            <table>
+                <!--    pomimo ?e z kontrolera szczytywany jest obiekt DTO tutaj nazwali?my to 'todo'-->
+                <tr th:each="todo : ${todos}">
+
+                    <td th:text="${todo.id}" />
+                    <td th:text="${todo.name}" />
+                    <td th:text="${todo.status}" />
+                    <td th:text="${todo.description}" />
+                    <td th:text="${todo.startDate}" />
+                    <td th:text="${todo.finishDate}" />
+
+
+                </tr>
+            </table>
+            <br/>
+            <table>
+                <tr th:each="todo : ${completed}">
+                    <td th:text="${todo.id}" />
+                    <td th:text="${todo.name}" />
+                    <td th:text="${todo.status}" />
+                    <td th:text="${todo.description}" />
+                    <td th:text="${todo.startDate}" />
+                    <td th:text="${todo.finishDate}" />
+
+                </tr>
+            </table>
+            <form action="/" method="post">
+
+                <div>
+                    <input type="text" name="id" id="id"  placeholder="give id of todo" />
+                </div>
+
+                <input type="submit" value="Set Completed" />
+            </form>
+        </div>
+    </div>
 </div>
 </body>
 </html>

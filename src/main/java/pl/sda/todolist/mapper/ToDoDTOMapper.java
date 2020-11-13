@@ -1,15 +1,14 @@
 package pl.sda.todolist.mapper;
-
 import pl.sda.todolist.dto.ToDoDTO;
 import pl.sda.todolist.entity.ToDo;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class ToDoDTOMapper {
+
+
+
     public static ToDo mapDTOToEntity(ToDoDTO dto) {
 
         ToDo toDo = new ToDo();

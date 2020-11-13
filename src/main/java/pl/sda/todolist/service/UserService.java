@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.BeanDefinitionDsl;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
 import pl.sda.todolist.dto.UserRegistrationDto;
 import pl.sda.todolist.entity.Role;
 import pl.sda.todolist.entity.ToDo;
@@ -38,14 +40,12 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public User save(UserRegistrationDto userRegistrationDto) {
-//        List<Role> userRoles = null;
-//        List<ToDo> userTodos = null;
-//        userRoles.add(new Role("ROLE_USER"));
-//        userTodos.add(new ToDo("Sample Todo",false));
+
         User user = new User(userRegistrationDto.getFirstName(),
                 userRegistrationDto.getLastName(), userRegistrationDto.getEmail(),
                 passwordEncoder.encode(userRegistrationDto.getPassword()),Arrays.asList(new Role("ROLE_USER")),Arrays.asList(new ToDo("sample todo",false)) );
         return userRepository.save(user);
+
     }
 
     @Override
@@ -61,6 +61,7 @@ public class UserService implements UserServiceInterface {
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
+
 
 
 }

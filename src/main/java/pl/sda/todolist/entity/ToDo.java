@@ -25,8 +25,14 @@ public class ToDo {
     @Column()
     private boolean finished;
 
+    @ManyToOne
+    @JoinTable(name = "user_id")
+    private User user;
+
+
 
     public ToDo() {
+
         startDate = new Date();
     }
 
@@ -34,6 +40,15 @@ public class ToDo {
         this();
         this.name = name;
         this.finished = finished;
+
+    }
+
+    public User getUserOfThisTodo() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public long getId() {
@@ -84,14 +99,5 @@ public class ToDo {
         this.finished = finished;
     }
 
-//    public void setFinished(){
-//
-//
-//        if(finished) {
-//            finishDate = new Date();
-//
-//        }
-//        this.finished = true;
-//    }
 
 }

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.sda.todolist.dto.UserRegistrationDto;
-import pl.sda.todolist.repo.UserRepository;
 import pl.sda.todolist.service.UserService;
 
 @Controller

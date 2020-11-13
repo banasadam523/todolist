@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.todolist.dto.ToDoDTO;
 import pl.sda.todolist.entity.ToDo;
+import pl.sda.todolist.entity.User;
 import pl.sda.todolist.mapper.ToDoDTOMapper;
 import pl.sda.todolist.service.ToDoService;
 
@@ -23,20 +24,6 @@ public class ToDoController {
     @Autowired
     private ToDoService todoService;
 
-    @RequestMapping(value = "/todos", method = RequestMethod.GET)
-    public String todos(Model model) {
-
-        List<ToDo> todos = todoService.getAllToDos();
-       List<ToDo> completed = todoService.getAllFinished();
-
-        List<ToDoDTO> dtos = ToDoDTOMapper.mapEntityToDto(todos);
-        List<ToDoDTO> completedDtos = ToDoDTOMapper.mapEntityToDto(completed);
-
-        model.addAttribute("todos", dtos);
-        model.addAttribute("completed", completedDtos);
-
-        return "todos";
-    }
 
     @RequestMapping(value = "/todos/add", method = RequestMethod.GET)
     public String createTodo(Model model) {
@@ -44,33 +31,6 @@ public class ToDoController {
         model.addAttribute("addTodo", new ToDoDTO());
 
         return "/createTodo";
-    }
-
-    @RequestMapping(value = "/todos/add", method = RequestMethod.POST)
-    public String createTodo(@ModelAttribute("Todo") @Validated ToDoDTO toDoDTO,
-                             BindingResult bindingResult, Model model) {
-
-        if (bindingResult.hasErrors()) {
-            return "/createTodo";
-        }
-
-
-        toDoDTO.setStartDate(new Date());
-        todoService.save(toDoDTO);
-
-
-        return "redirect:/todos";
-    }
-
-    @RequestMapping(value = "/todos",method = RequestMethod.POST)
-    public String completeTodo(@RequestParam("id") Long id){
-
-
-        //ustawia status jako zakończony
-
-        todoService.finishToDo(id);
-
-        return "redirect:/todos";
     }
 
 

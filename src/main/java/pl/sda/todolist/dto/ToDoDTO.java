@@ -1,5 +1,6 @@
 package pl.sda.todolist.dto;
 
+
 import java.util.Date;
 
 public class ToDoDTO {
@@ -13,8 +14,12 @@ public class ToDoDTO {
 
     private boolean status;
 
+
     public ToDoDTO() {
     }
+
+
+
 
     public ToDoDTO(String name) {
         this.name = name;

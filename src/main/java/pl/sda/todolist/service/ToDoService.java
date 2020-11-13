@@ -1,15 +1,19 @@
 package pl.sda.todolist.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import pl.sda.todolist.dto.ToDoDTO;
 import pl.sda.todolist.entity.ToDo;
+import pl.sda.todolist.entity.User;
 import pl.sda.todolist.mapper.ToDoDTOMapper;
 import pl.sda.todolist.repo.ToDoRepository;
-
-import java.text.ParseException;
+import pl.sda.todolist.repo.UserRepository;
 import java.util.Date;
 import java.util.List;
+
 
 @Service
 public class ToDoService {
@@ -17,25 +21,26 @@ public class ToDoService {
     @Autowired
     private ToDoRepository toDoRepository;
 
-    public void save(ToDoDTO toDoDTO){
+    @Autowired
+    private UserRepository userRepository;
 
-        ToDo toDo = ToDoDTOMapper.mapDTOToEntity(toDoDTO);
+    public void save(ToDoDTO toDoDTO){
+        ToDo toDo;
+        toDo = ToDoDTOMapper.mapDTOToEntity(toDoDTO);
+        toDo.setUser(getCurrentUser());
         toDoRepository.save(toDo);
     }
 
 
-    public ToDo addNewToDo(String name) {
-        ToDo todo = new ToDo(name, false);
-        return toDoRepository.save(todo);
-    }
-
 
     public List<ToDo> getAllFinished(){
-        return toDoRepository.getAllByFinished(true);
+
+        return toDoRepository.getAllByFinishedAndUserId(true, getCurrentUser().getId());
     }
 
     public List<ToDo> getAllToDos(){
-        return toDoRepository.getAllByFinished(false);
+
+        return toDoRepository.getAllByFinishedAndUserId(false, getCurrentUser().getId());
     }
 
     public void finishToDo(Long id) {
@@ -46,8 +51,25 @@ public class ToDoService {
             todo.setFinishDate(new Date());
             toDoRepository.save(todo);
         }
-        //TODO what if user sent bad id? Is this return correct?
         return;
 
     }
+
+    private User getCurrentUser() {
+        return userRepository.findByEmail(getCurrentUserEmail());
+    }
+
+
+  public String getCurrentUserEmail() {
+      Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+      if (!(authentication instanceof AnonymousAuthenticationToken)) {
+          // In SpringSecurityContext 'UserName' is an unique email given by user during registration
+          String currentUserName = authentication.getName();
+          return currentUserName;
+      }
+      return "";
+
+
+  }
+
 }

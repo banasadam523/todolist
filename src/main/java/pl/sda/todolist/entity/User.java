@@ -32,12 +32,13 @@ public class User {
                     name = "role_id", referencedColumnName = "id"))
      private Collection<Role> roles;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_todos",
-            joinColumns = @JoinColumn(
-                name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name= "todo_id", referencedColumnName = "id"))
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+////    @JoinTable(name = "user_todos",
+////            joinColumns = @JoinColumn(
+////                name = "user_id", referencedColumnName = "id"),
+////            inverseJoinColumns = @JoinColumn(
+////                    name= "todo_id", referencedColumnName = "id"))
+   @OneToMany(mappedBy = "user") //Simple way
     private List<ToDo> userTodos;
 
     public User() {
